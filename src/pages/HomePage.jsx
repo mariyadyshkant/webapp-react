@@ -1,7 +1,11 @@
+
 export default function HomePage() {
     return (
         <>
-            <h1>Home Page</h1>
+            <div>
+                <h1>Home Page</h1>
+                {/* Additional content for the home page can be added here */}
+            </div>
         </>
-    )
+    );
 }
