@@ -11,9 +11,12 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.7",
+    "dom": "^0.0.3",
     "icons": "^1.0.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.0",
+    "react-router-dom": "^7.7.1",
+    "route": "^0.2.5",
     "router": "^2.2.0"
   },
   "devDependencies": {
