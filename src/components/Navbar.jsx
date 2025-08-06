@@ -13,7 +13,7 @@ export default function Navbar() {
                     <ul className="navbar-nav">
                         {menu.map(item => (
                             <li className="nav-item" key={item.id}>
-                                <NavLink className="nav-link" to={item.path} activeClassName="active">
+                                <NavLink className="nav-link" to={item.path}>
                                     {item.name}
                                 </NavLink>
                             </li>
