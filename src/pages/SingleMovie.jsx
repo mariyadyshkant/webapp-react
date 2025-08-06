@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import ReviewsMovie from '../components/ReviewsMovie';
 
 export default function SingleMovie() {
     const { id } = useParams();
@@ -7,7 +8,7 @@ export default function SingleMovie() {
     const api_server_url = 'http://localhost:3000/api/movies';
     const [movie, setMovie] = useState([]);
 
-    const imageUrl = movie && movie.image ? `/public/${movie.image}` : '/public/default-movie.jpg';
+    const imageUrl = movie.image ? `/public/${movie.image}` : '/public/default-movie.jpg';
 
     useEffect(() => {
         const fetchMovie = async () => {
@@ -38,6 +39,7 @@ export default function SingleMovie() {
                     </div>
                 </div>
             </div>
+            <ReviewsMovie reviews={movie.reviews} />
         </>
     );
 }
