@@ -1,21 +1,13 @@
 import { useState } from 'react';
 
-export default function NewReview(movieId, onAddReview) {
+export default function NewReview({ movieId, onAddReview }) {
     const [name, setName] = useState("");
     const [text, setText] = useState("");
-    const [vote, setVote] = useState(5);
-
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value
-        }));
-    };
+    const [vote, setVote] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newReview = { name, text, vote, movieId };
+        const newReview = { name, text, vote };
         try {
             const response = await fetch(`http://localhost:3000/api/movies/${movieId}`, {
                 method: 'POST',
@@ -29,7 +21,7 @@ export default function NewReview(movieId, onAddReview) {
             onAddReview(savedReview);
             setName('');
             setText('');
-            setVote(5);
+            setVote('');
         } catch (error) {
             console.error('Error adding review:', error);
         }
