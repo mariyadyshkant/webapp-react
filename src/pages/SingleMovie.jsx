@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ReviewsMovie from '../components/ReviewsMovie';
+import NewReview from '../components/NewReview';
 
 export default function SingleMovie() {
     const { id } = useParams();
@@ -40,6 +41,12 @@ export default function SingleMovie() {
                 </div>
             </div>
             <ReviewsMovie reviews={movie.reviews} />
+            <div className="container d-flex  flex-column align-items-center mt-4">
+                <h3 className="text-center">Add a Review</h3>
+                <div className="col-6">
+                    <NewReview movieId={id} />
+                </div>
+            </div>
         </>
     );
 }
