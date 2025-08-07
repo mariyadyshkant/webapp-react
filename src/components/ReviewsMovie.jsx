@@ -1,9 +1,14 @@
 export default function ReviewsMovie({ reviews }) {
     // <pre>{JSON.stringify(reviews, null, 2)}</pre>
+    // console.log(reviews);
+    if (!Array.isArray(reviews) || reviews.length === 0) {
+        return <p className="text-center mt-4">Nessuna recensione disponibile.</p>;
+    }
+
     return (
         <div className="container mt-4">
             <h3 className="text-center">Reviews</h3>
-            {(reviews ?? []).map(review => (
+            {reviews.map(review => (
                 <div className="row justify-content-center" key={review.id}>
                     <div className="col-md-6 mb-2">
                         <div className="card">
