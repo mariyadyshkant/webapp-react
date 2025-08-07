@@ -4,25 +4,33 @@ import ReviewsMovie from '../components/ReviewsMovie';
 import NewReview from '../components/NewReview';
 
 export default function SingleMovie() {
-    const { id } = useParams();
+    const { id: movieId } = useParams();
+    const [movie, setMovie] = useState({});
+    const [reviews, setReviews] = useState([]);
+    const imageUrl = movie.image ? `/public/${movie.image}` : '/public/default-movie.jpg';
 
     const api_server_url = 'http://localhost:3000/api/movies';
-    const [movie, setMovie] = useState([]);
 
-    const imageUrl = movie.image ? `/public/${movie.image}` : '/public/default-movie.jpg';
+
 
     useEffect(() => {
         const fetchMovie = async () => {
             try {
-                const response = await fetch(`${api_server_url}/${id}`);
+                const response = await fetch(`${api_server_url}/${movieId}`);
                 const data = await response.json();
                 setMovie(data);
+                setReviews(data.reviews || []);
             } catch (err) {
                 console.error(err);
             }
         };
+
         fetchMovie();
-    }, [id]);
+    }, [movieId, api_server_url]);
+
+    const handleAddReview = (newReview) => {
+        setReviews((prevReviews) => [newReview, ...prevReviews]);
+    };
 
     return (
         <>
@@ -40,11 +48,11 @@ export default function SingleMovie() {
                     </div>
                 </div>
             </div>
-            <ReviewsMovie reviews={movie.reviews} />
+            <ReviewsMovie reviews={reviews} />
             <div className="container d-flex  flex-column align-items-center mt-4">
                 <h3 className="text-center">Add a Review</h3>
                 <div className="col-6">
-                    <NewReview movieId={id} />
+                    <NewReview movieId={movieId} onAddReview={handleAddReview} />
                 </div>
             </div>
         </>
